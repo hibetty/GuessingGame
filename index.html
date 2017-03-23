@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guessing Game</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,700" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <div id="headers">
+      <h1>Play the Guessing Game!</h1>
+      <h2>Guess a number between 1-100</h2>
+    </div>
+    <div id="main">
+      <div id="inputs">
+        <input type="text" id="guess" maxlength="3" autofocus>
+        <input type="button" id="submit" class="button" value="Guess">
+      </div>
+      <div id="guesses">
+      <h3>Previous Guesses</h3>
+        <ul>
+          <li>?</li>
+          <li>?</li>
+          <li>?</li>
+          <li>?</li>
+          <li>?</li>
+        </ul>
+      </div>
+      <div id="menu-btns">
+        <input type="button" id="reset" class="button" value="Reset Game">
+        <input type="button" id="hint" class="button" value="Get a Hint">
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <div class="left">Project by Betty Lin<br/>April 2017 Cohort<br/>&#10084;</div>
+    <div class="right"><img src="grace_hopper_logo.png"></div>
+  </div>
+</body>
+</html>
