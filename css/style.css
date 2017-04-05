@@ -1,0 +1,115 @@
+html{
+  height: 100%;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  background-color: #004056;
+  background: linear-gradient(#004056, #74ceb7);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  margin: 0;
+  color: #fff;
+}
+
+h1 {
+  font-weight: 700;
+}
+
+h2 {
+  font-weight: 100;
+}
+
+h3 {
+  font-weight: 700;
+}
+
+#app {
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 2em;
+}
+
+.button {
+  color: #fff;
+  background-color: #d07500;
+  padding: 1.2em 2em;
+  font-size: 1.1em;
+  border-radius: 0.7em;
+  border: none;
+  box-shadow: 0 0.25em #714000;
+}
+
+.button:hover {
+  background-color: #ff8f00;
+}
+
+.button:active {
+  background-color: #ff8f00;
+  box-shadow: 0 0.2em #714000;
+  transform: translateY(0.1em);
+}
+
+.button:focus {
+  outline: none;
+}
+
+#guess {
+  padding: 1.2em 2em;
+  border-radius: 0.7em;
+  margin: 1.3em;
+  font-size: 1.1em;
+  border: 0;
+}
+
+#guess:hover {
+  box-shadow: 0 0.15em #ff8f00;
+}
+
+#guess:focus {
+  outline: none;
+  box-shadow: 0 0.15em #ff8f00;
+}
+
+#inputs {
+  padding: 1.2em;
+}
+
+#guesses ul {
+  list-style: none;
+  padding: 2em;
+}
+
+#guesses li {
+  display: inline;
+  font-size: 2em;
+  padding: 1.5em;
+}
+
+#menu-btns input[type=button] {
+  margin: 0 0.7em;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding-bottom: 1.4em;
+}
+
+.left {
+  float: left;
+  padding-left: 1.5em;
+}
+
+.right {
+  float: right;
+  padding-right: 1.5em;
+}
+
+.right img {
+  height: 50px;
+}
