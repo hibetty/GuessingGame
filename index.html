@@ -4,22 +4,22 @@
   <meta charset="UTF-8">
   <title>Guessing Game</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,700" rel="stylesheet">
-  <link href="style.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
   <div id="app">
     <div id="headers">
-      <h1>Play the Guessing Game!</h1>
-      <h2>Guess a number between 1-100</h2>
+      <h1 id="title">Play the Guessing Game!</h1>
+      <h2 id="subtitle">Guess a number between 1-100</h2>
     </div>
     <div id="main">
       <div id="inputs">
         <input type="text" id="guess" maxlength="3" autofocus>
         <input type="button" id="submit" class="button" value="Guess">
       </div>
-      <div id="guesses">
+      <div>
       <h3>Previous Guesses</h3>
-        <ul>
+        <ul id="guesses">
           <li>?</li>
           <li>?</li>
           <li>?</li>
@@ -36,7 +36,10 @@
 
   <div id="footer">
     <div class="left">Project by Betty Lin<br/>April 2017 Cohort<br/>&#10084;</div>
-    <div class="right"><img src="grace_hopper_logo.png"></div>
+    <div class="right"><img src="images/grace_hopper_logo.png"></div>
   </div>
+
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+  <script src="js/GuessingGame.js"></script>
 </body>
 </html>

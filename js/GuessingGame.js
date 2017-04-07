@@ -33,7 +33,7 @@ Game.prototype.isLower = function(){
 }
 
 Game.prototype.playersGuessSubmission = function(num){
-  if(num >= 1 && num <= 100 || num === NaN){
+  if((num >= 1 && num <= 100) && num !== NaN){
     this.playersGuess = num;
     return this.checkGuess();
   } else {
@@ -41,35 +41,35 @@ Game.prototype.playersGuessSubmission = function(num){
   }
 }
 
+Game.prototype.getLastGuess = function(){
+  return this.pastGuesses[this.pastGuesses.length-1];
+}
+
 Game.prototype.checkGuess = function(){
-  var duplicate = false
-
-  for(var i=0; i<this.pastGuesses.length; i++){
-    if(this.pastGuesses[i] === this.playersGuess){
-      duplicate = true;
-    }
-  }
-
-  if(this.pastGuesses.length <= 5){
-    if(this.playersGuess === this.winningNumber){
-      return 'You Win!';
-    } else if(duplicate){
-      return 'You have already guessed that number.'
-    } else {
-      this.pastGuesses.push(this.playersGuess);
-    }
-  }
-
-  if(this.pastGuesses.length === 5){
-    return 'You Lose.';
-  } else if(this.difference() < 10){
-    return 'You\'re burning up!';
-  } else if(this.difference() >= 10 && this.difference() < 25){
-    return 'You\'re lukewarm.';
-  } else if(this.difference() >= 25 && this.difference() < 50){
-    return 'You\'re a bit chilly.';
+  if(this.pastGuesses.includes(this.playersGuess)){
+    return 'You have already guessed that number.';
   } else {
-    return 'You\'re ice cold!';
+    this.pastGuesses.push(this.playersGuess);
+
+      if(this.pastGuesses.length < 5){
+        if(this.difference() === 0){
+          return 'You Win!';
+        } else if(this.difference() < 10){
+          return 'You\'re burning up!';
+        } else if(this.difference() >= 10 && this.difference() < 25){
+          return 'You\'re lukewarm.';
+        } else if(this.difference() >= 25 && this.difference() < 50){
+          return 'You\'re a bit chilly.';
+        } else {
+          return 'You\'re ice cold!';
+        }
+      } else {
+        if(this.difference() === 0){
+          return 'You Win!';
+        } else {
+          return 'Game Over.';
+        }
+      }
   }
 }
 
@@ -86,3 +86,64 @@ Game.prototype.provideHint = function(){
 
   return shuffle(hint);
 }
+/*
+$(window).resize(function(){
+  $('body').css('background', 'linear-gradient(#004056, #74ceb7)');
+}); */
+
+$(document).ready(function(){
+  var gameInstance = new Game();
+  function saveGuess(){
+    var guess = $('#guess').val();
+    var result = gameInstance.playersGuessSubmission(guess);
+    var lower = gameInstance.isLower();
+    var lastGuess = gameInstance.getLastGuess();
+
+    $('#guess').val('');
+    $('#title').text(result);
+
+    if(result === 'Game Over.' || result === 'You Win!'){
+      $('#subtitle').text('Click \'Reset\' to play again!');
+      $('#submit').prop('disabled', true);
+      $('#submit').addClass('buttonDisable');
+      $('#hint').prop('disabled', true);
+      $('#hint').addClass('buttonDisable');
+    } else if(lower){
+      $('#subtitle').text('Guess higher!');
+    } else {
+      $('#subtitle').text('Guess lower!');
+    }
+
+    if(result !== 'You have already guessed that number.'){
+      $('#guesses').prepend('<li>' + lastGuess + '</li>');
+      $('#guesses').find('li').remove(':last-child');
+    }
+  }
+
+  $('#submit').on('click', saveGuess);
+  $('#guess').on('keydown', function(event){
+    var key = event.keyCode;
+    if(key === 13){
+      saveGuess();
+    }
+  });
+
+  $('#reset').on('click', function(){
+    gameInstance = newGame();
+    $('#title').text('Play the Guessing Game!');
+    $('#subtitle').text('Guess a number between 1-100');
+    $('#submit').prop('disabled', false);
+    $('#submit').removeClass('buttonDisable');
+    $('#hint').prop('disabled', false);
+    $('#hint').removeClass('buttonDisable');
+    $('#guesses').find('li').text('?');
+  });
+
+  $('#hint').on('click', function(){
+    $('#subtitle').text('It might be... ' + gameInstance.provideHint().join("... or ") + '!');
+  });
+
+  
+
+
+});

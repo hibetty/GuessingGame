@@ -141,7 +141,7 @@ describe("Game class", function() {
                 game.playersGuessSubmission(2);
                 game.playersGuessSubmission(3);
                 game.playersGuessSubmission(4);
-                expect(game.playersGuessSubmission(5)).toEqual('You Lose.');
+                expect(game.playersGuessSubmission(5)).toEqual('Game Over.');
             });
             it('returns "You\'re burning up!" if the difference between playersGuess and winningGuess is less than 10', function() {
                 game.winningNumber = 42;
