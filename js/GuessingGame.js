@@ -45,6 +45,10 @@ Game.prototype.getLastGuess = function(){
   return this.pastGuesses[this.pastGuesses.length-1];
 }
 
+Game.prototype.getGuessNum = function(){
+  return this.pastGuesses.length;
+}
+
 Game.prototype.checkGuess = function(){
   if(this.pastGuesses.includes(this.playersGuess)){
     return 'You have already guessed that number.';
@@ -86,10 +90,6 @@ Game.prototype.provideHint = function(){
 
   return shuffle(hint);
 }
-/*
-$(window).resize(function(){
-  $('body').css('background', 'linear-gradient(#004056, #74ceb7)');
-}); */
 
 $(document).ready(function(){
   var gameInstance = new Game();
@@ -98,6 +98,7 @@ $(document).ready(function(){
     var result = gameInstance.playersGuessSubmission(guess);
     var lower = gameInstance.isLower();
     var lastGuess = gameInstance.getLastGuess();
+    var guessNum = gameInstance.getGuessNum();
 
     $('#guess').val('');
     $('#title').text(result);
@@ -115,8 +116,7 @@ $(document).ready(function(){
     }
 
     if(result !== 'You have already guessed that number.'){
-      $('#guesses').prepend('<li>' + lastGuess + '</li>');
-      $('#guesses').find('li').remove(':last-child');
+      $('#guesses').find('li:nth-child('+ guessNum + ')').text(lastGuess);
     }
   }
 
@@ -142,8 +142,5 @@ $(document).ready(function(){
   $('#hint').on('click', function(){
     $('#subtitle').text('It might be... ' + gameInstance.provideHint().join("... or ") + '!');
   });
-
   
-
-
 });
