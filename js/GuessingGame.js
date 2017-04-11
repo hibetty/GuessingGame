@@ -49,6 +49,10 @@ Game.prototype.getGuessNum = function(){
   return this.pastGuesses.length;
 }
 
+Game.prototype.getWinningNum = function(){
+  return this.winningNumber;
+}
+
 Game.prototype.checkGuess = function(){
   if(this.pastGuesses.includes(this.playersGuess)){
     return 'You have already guessed that number.';
@@ -99,12 +103,20 @@ $(document).ready(function(){
     var lower = gameInstance.isLower();
     var lastGuess = gameInstance.getLastGuess();
     var guessNum = gameInstance.getGuessNum();
+    var winningNum = gameInstance.getWinningNum();
 
     $('#guess').val('');
     $('#title').text(result);
 
     if(result === 'Game Over.' || result === 'You Win!'){
-      $('#subtitle').text('Click \'Reset\' to play again!');
+      if(result === 'You Win!'){
+        $('body').css('background', 'linear-gradient(#e91e63, #00bcd4)');
+        $('#subtitle').text('Click \'Reset\' to play again!');
+      } else {
+        $('#subtitle').text('The winning number was ' + winningNum + '. Click \'Reset\' to play again!');
+      }
+
+
       $('#submit').prop('disabled', true);
       $('#submit').addClass('buttonDisable');
       $('#hint').prop('disabled', true);
@@ -137,10 +149,11 @@ $(document).ready(function(){
     $('#hint').prop('disabled', false);
     $('#hint').removeClass('buttonDisable');
     $('#guesses').find('li').text('?');
+    $('body').css('background', 'linear-gradient(#004056, #74ceb7)');
   });
 
   $('#hint').on('click', function(){
     $('#subtitle').text('It might be... ' + gameInstance.provideHint().join("... or ") + '!');
   });
-  
+
 });
